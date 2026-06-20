@@ -1,0 +1,30 @@
+{
+  "name": "duskvorn",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DuskvorN — AI travel intelligence system (flights, private jets, hotels, cars).",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run dev --workspace=apps/api",
+    "dev:web": "npm run dev --workspace=apps/web",
+    "build": "npm run build --workspace=packages/core && npm run build --workspace=packages/agents && npm run build --workspace=apps/api && npm run build --workspace=apps/web",
+    "zip": "ts-node scripts/export-zip.ts",
+    "push": "ts-node scripts/push-github.ts",
+    "build:all": "npm run build && npm run zip && npm run push"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4",
+    "archiver": "^7.0.1",
+    "simple-git": "^3.25.0",
+    "dotenv": "^16.4.5",
+    "@types/archiver": "^6.0.2",
+    "@types/node": "^20.14.0"
+  }
+}
