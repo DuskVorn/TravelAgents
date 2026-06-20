@@ -37,7 +37,7 @@ async function getAmadeusToken(): Promise<string> {
     }),
   });
   if (!res.ok) throw new Error(`amadeus auth failed: ${res.status}`);
-  const data = await res.json();
+  const data = (await res.json()) as any;
   cachedAmadeusToken = { token: data.access_token, expiresAt: Date.now() + (data.expires_in - 30) * 1000 };
   return cachedAmadeusToken.token;
 }
@@ -54,7 +54,7 @@ async function liveFlightSearch(params: SearchParams): Promise<FlightResult[]> {
 
   const res = await fetch(url.toString(), { headers: { Authorization: `Bearer ${token}` } });
   if (!res.ok) throw new Error(`amadeus search failed: ${res.status}`);
-  const data = await res.json();
+  const data = (await res.json()) as any;
 
   const cabin = params.cabinClass ?? "economy";
   const offers = (data.data ?? []) as any[];

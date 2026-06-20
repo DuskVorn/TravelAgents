@@ -24,7 +24,7 @@ async function liveCarSearch(params: SearchParams): Promise<CarResult[]> {
     }),
   });
   if (!res.ok) throw new Error(`car rental provider failed: ${res.status}`);
-  const data = await res.json();
+  const data = (await res.json()) as any;
   const days = daysBetween(params.departDate, params.returnDate);
   const vehicles = (data.vehicles ?? []) as any[];
 
@@ -40,7 +40,7 @@ async function liveCarSearch(params: SearchParams): Promise<CarResult[]> {
     city: params.destination,
     pricePerDay: v.pricePerDay,
     days,
-    transmission: v.transmission === "manual" ? "manual" : "automatic",
+    transmission: (v.transmission === "manual" ? "manual" : "automatic") as "automatic" | "manual",
     seats: v.seats ?? 5,
   }));
 

@@ -47,7 +47,7 @@ async function generateSummary(
       }),
     });
     if (!res.ok) throw new Error(`OpenAI request failed: ${res.status}`);
-    const data = await res.json();
+    const data = (await res.json()) as any;
     return data.choices?.[0]?.message?.content?.trim() ?? "Results ready.";
   } catch {
     return `Results ready for ${params.origin} → ${params.destination} on ${params.departDate}.`;

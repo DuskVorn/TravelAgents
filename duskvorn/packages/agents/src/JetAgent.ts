@@ -28,7 +28,7 @@ async function liveJetSearch(params: SearchParams): Promise<JetResult[]> {
     }),
   });
   if (!res.ok) throw new Error(`jet charter API failed: ${res.status}`);
-  const data = await res.json();
+  const data = (await res.json()) as any;
   const offers = (data.offers ?? []) as any[];
 
   const raw = offers.map((offer, idx) => ({

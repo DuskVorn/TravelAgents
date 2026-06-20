@@ -24,7 +24,7 @@ async function liveHotelSearch(params: SearchParams): Promise<HotelResult[]> {
     headers: { Authorization: `Bearer ${process.env.BOOKING_API_KEY}` },
   });
   if (!res.ok) throw new Error(`booking provider failed: ${res.status}`);
-  const data = await res.json();
+  const data = (await res.json()) as any;
   const nights = nightsBetween(params.departDate, params.returnDate);
   const hotels = (data.hotels ?? data.result ?? []) as any[];
 
