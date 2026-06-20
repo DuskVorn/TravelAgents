@@ -3,6 +3,5 @@
   "buildCommand": "cd ../.. && npm install && npm run build --workspace=packages/core && npm run build --workspace=apps/web",
   "outputDirectory": ".next",
   "framework": "nextjs",
-  "installCommand": "echo skip-install-handled-by-buildCommand",
-
+  "installCommand": "echo skip-install-handled-by-buildCommand"
 }
